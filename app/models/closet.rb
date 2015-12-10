@@ -14,4 +14,6 @@ class Closet < ActiveRecord::Base
   has_many :closet_items
   has_many :items, through: :closet_items
 
+  acts_as_votable
+
 end

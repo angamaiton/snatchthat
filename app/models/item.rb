@@ -18,10 +18,12 @@ class Item < ActiveRecord::Base
   has_many :closets, through: :closet_items
   has_many :prices
 
+  acts_as_votable
+  
+
   def exists?
     Item.exists?(source_id: self.source_id)
   end
-
 
   def get_hidefy_price(end_path)
     hidefy_item_data = Adapters::HidefyConnection.new.query(end_path)
@@ -37,6 +39,5 @@ class Item < ActiveRecord::Base
   def how_many_users_have_this
     self.closets.length
   end
-
 
 end

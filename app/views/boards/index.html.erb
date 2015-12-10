@@ -20,7 +20,6 @@
   <br>
   <hr>
 
-
   <%= link_to "New Closet", new_user_closet_path(current_user), class: "btn btn-success" %>
   <br><br>
   <p>
@@ -54,11 +53,13 @@
   </strong>
    <br>
       <% if activity.trackable.class == Closet && activity.action == "create" %>
-      <em class = "text-muted">created closet </em> <%=activity.trackable.name%>
+        <em class = "text-muted">created closet </em> <%=activity.trackable.name%>
+        <%= link_to like_item_path(current_user.id), method: :put do %><br>
+        Upvote (<%= activity.trackable.get_upvotes.size %>)
+      <% end %>
 
       <% elsif activity.trackable.class == Closet && activity.action == "destroy"%>
       <em class = "text-muted">deleted closet </em> <%=activity.trackable.name%>
-
 
       <% elsif activity.trackable.class == ClosetItem && activity.action == "create"%>
       <em class = "text-muted">Added</em> <%=Item.find(activity.trackable.item_id).name%> <em class = "text-muted">to</em> <%=Closet.find(activity.trackable.closet_id).name%>

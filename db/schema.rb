@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20151210170558) do
+=======
+ActiveRecord::Schema.define(version: 20151210192228) do
+>>>>>>> master
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,8 +25,10 @@ ActiveRecord::Schema.define(version: 20151210170558) do
     t.string   "action"
     t.integer  "trackable_id"
     t.string   "trackable_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "trackable_name"
+    t.string   "trackable_source"
   end
 
   add_index "activities", ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id", using: :btree
@@ -44,6 +50,7 @@ ActiveRecord::Schema.define(version: 20151210170558) do
   create_table "closets", force: :cascade do |t|
     t.string   "name"
     t.integer  "board_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
+  put 'users/:user_id/closets/:id/like' => 'closets#upvote', as: :closet_like
+
   namespace :api, :defaults => { :format => 'json' } do
     resources :users, except: [:new, :edit]
     resources :closets, except: [:new, :edit]
@@ -24,6 +26,7 @@ Rails.application.routes.draw do
       put "like", to: "items#upvote"
     end
   end
+
 
   resources :closet_items, only: [:create, :new, :destroy]
 

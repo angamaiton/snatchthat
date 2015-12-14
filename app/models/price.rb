@@ -15,17 +15,19 @@ class Price < ActiveRecord::Base
   #need to refactor
   def self.price_check
     Item.all.each do |item|
+      @board = item.closets.first.board
+      last_price = item.prices.last.price.to_i
       if item.source_type == "Amazon"
         current_price = item.get_amazon_price(item.source_id)
-        price_dif = item.prices.last.price.to_i - current_price.to_i
-        user = item.closets.first.board.user
+        price_dif = last_price - current_price.to_i
+        user = @board.user
         if price_dif != 0 && user.notifications?(user.id)
           # Adapters::TwilioMessageClient.new.send_message(price_dif, item)
         end
       else
         current_price = item.get_hidefy_price("items/#{item.source_id}")
-        price_dif = item.prices.last.price.to_i - current_price
-        user = item.closets.first.board.user
+        price_dif = last_price - current_price
+        user = @board.user
         if price_dif != 0 && user.notifications?(user.id)
           # Adapters::TwilioMessageClient.new.send_message(price_dif, item)
         end

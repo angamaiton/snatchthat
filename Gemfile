@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
+gem 'rails-api'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -31,6 +32,8 @@ gem 'devise'
 gem 'annotate'
 gem 'acts_as_votable', '~> 0.10.0'
 
+gem 'kaminari'
+gem 'api-pagination'
 gem 'faker'
 gem 'vacuum'
 gem 'figaro'

@@ -15,6 +15,6 @@ class Activity < ActiveRecord::Base
   belongs_to :user
 
   belongs_to :trackable, polymorphic: true
-
+  paginates_per 10
 
 end

@@ -10,6 +10,7 @@ class ClosetsController < ApplicationController
 
   def show
     @closet = Closet.find(params[:id])
+    @closet_item = ClosetItem.where(closet_id: @closet.id, item_id: item.id)
   end
 
   def create

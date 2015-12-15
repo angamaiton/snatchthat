@@ -9,7 +9,7 @@ class Api::ClosetsController < ApplicationController
     closet.user_id = params["closet"]["board_id"]
     closet.save
     # track_activity(closet)
-    # redirect_to api_closet_path(closet)
+    render json: closet
   end
 
   def show
@@ -18,10 +18,11 @@ class Api::ClosetsController < ApplicationController
   end
 
   def destroy
-    @closet = Closet.find(params[:id])
-    @closet.destroy
-    track_activity(@closet)
-    # redirect_to '/'
+    closet = Closet.find(params[:id])
+    closet.destroy
+    # track_activity(@closet)
+    user = closet.user
+    render nothing: true
   end
 
   private

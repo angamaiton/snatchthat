@@ -69,4 +69,17 @@ class Item < ActiveRecord::Base
     price_change = last_price.price.to_i - second_last_price.price.to_i
   end
 
+  def dthree_data
+  dthree_hash = {}
+  self.prices.each_with_index {|item, index|
+    hash[index] = {[price.price] => price.created_at}
+  }
+  dthree_hash
+
+  binding.pry
+  end
+
+
+
+
 end

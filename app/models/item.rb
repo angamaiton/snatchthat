@@ -70,13 +70,13 @@ class Item < ActiveRecord::Base
   end
 
   def dthree_data
-  dthree_hash = {}
-  self.prices.each_with_index {|item, index|
-    hash[index] = {[price.price] => price.created_at}
-  }
-  dthree_hash
+    dthree_hash = {}
+    self.prices.each_with_index {|item, index|
+      hash[index] = {[price.price] => price.created_at.strftime("%H-%M-%S")}
+    }
+    dthree_hash
 
-  binding.pry
+    binding.pry
   end
 
 

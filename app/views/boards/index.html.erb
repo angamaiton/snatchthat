@@ -28,7 +28,7 @@
     <%= render 'shared/stats' %>
   </section>
 </p><br>
-  <a href = "/users/<%= current_user.slug %>">My Profile</a> | <%= link_to "Recent Activity", following_user_path(current_user.slug) %> | <%= link_to "Trending", followers_user_path(current_user.username) %>
+  <a href = "/users/<%= current_user.slug %>">My Profile</a> | <%= link_to "Recent Activity", following_user_path(current_user.slug) %> | <%= link_to "Trending", trending_path %>
 </div>
 
 <div class = "col-sm-9">

@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     resources :items, except: [:new, :edit]
   end
 
+  get 'trending' => 'boards#trending', as: :trending
+
   resources :items do
     member do
       put "like", to: "items#upvote"

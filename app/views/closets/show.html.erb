@@ -1,23 +1,25 @@
 <center><h3><%= @closet.name %></h3>
-<%= link_to "delete", {:controller => :closets, :action => 'destroy', :id => @closet.id }, :method => :delete %></center>
-
-
-  <h1><%= link_to "+", new_search_path, {:style=>'display:inline-block;''width:250px;''height:250px;''text-align: center;''padding-top: 100px;
-''text-decoration: none;', :class => "butt"} %></h1>
-
+<%= link_to "Delete Closet", {:controller => :closets, :action => 'destroy', :id => @closet.id }, :method => :delete %> | 
+<%= link_to "New Item", new_search_path %></center>
 
 <% @closet.items.in_groups_of(4) do |group| %>
   <div class="row">
     <% group.compact.each do |item| %>
+    <center>
     <div class="col-sm-6 col-md-2">
-    <div class="thumbnail">
+    <div class="thumbnail" style="width:250px; height:250px;">
       <%= link_to item.name, item_path(item) %><br>
-      <%= image_tag item.image_url %>
+      <% if item.image_url == "" %>
+        <%= image_tag("new-item.png", size: "165x165") %>
+      <% else %>
+        <%= image_tag item.image_url %>
+      <% end %>
       <div class = 'caption'>
-      <strong>Price: </strong><%= item.prices.last.price %><br>
+      <strong>Price: </strong>$<%= item.prices.last.price %>.00<br>
       <% closet_item = ClosetItem.where(closet_id: @closet.id, item_id: item.id) %>
       <%= link_to 'Delete', closet_item_path(closet_item[0].id), method: :delete %>
     </div>
+  </center>
     </div>
   </div>
   <% end %>

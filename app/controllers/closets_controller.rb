@@ -26,6 +26,12 @@ class ClosetsController < ApplicationController
     redirect_to '/'
   end
 
+  def upvote
+    @closet = Closet.find(params[:id])
+    @closet.liked_by current_user
+    redirect_to :back
+  end
+
   private
   def closet_params
     params.require(:closet).permit(:name, :board_id, :user_id)

@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
 
   def upvote
     @item = Item.find(params[:id])
-    @item.upvote_by current_user
+    @item.liked_by current_user
     redirect_to :back
   end
 

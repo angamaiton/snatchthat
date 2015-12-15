@@ -28,7 +28,7 @@
     <%= render 'shared/stats' %>
   </section>
 </p><br>
-  <a href = "/users/<%= current_user.slug %>">My Profile</a> | <%= link_to "Recent Activity", following_user_path(current_user.slug) %> | <%= link_to "Trending", followers_user_path(current_user.username) %>
+  <a href = "/users/<%= current_user.slug %>">My Profile</a> | <%= link_to "Recent Activity", following_user_path(current_user.slug) %> | <%= link_to "Trending", trending_path %>
 </div>
 
 <div class = "col-sm-9">
@@ -54,14 +54,24 @@
   </strong>
    <br>
       <% if activity.trackable_type == "Closet" && activity.action == "create" %>
-      <em class = "text-muted">created closet </em> <%=activity.trackable_name%>
+      <em class = "text-muted">created closet </em> <%=activity.trackable_name%><br>
+            <%= link_to closet_like_path(user_id: current_user.id, id: Closet.find_by(id: activity.trackable_id)), method: :put do %>
+                Like:
+                <%= activity.user.closets.find_by(name: activity.trackable_name).get_likes.size %>
+            <% end %>
 
-      <% elsif activity.trackable_type == "Closet" && activity.action == "destroy"%>
+
+
+  <% elsif activity.trackable_type == "Closet" && activity.action == "destroy"%>
       <em class = "text-muted">deleted closet </em> <%=activity.trackable_name%>
 
 
       <% elsif activity.trackable.class == Item && activity.action == "create"%>
-      <em class = "text-muted">Added</em> <%=activity.trackable_name%> <em class = "text-muted">to</em> <%= activity.trackable_source %>
+      <em class = "text-muted">Added</em> <%=activity.trackable_name%> <em class = "text-muted">to</em> <%= activity.trackable_source %><br>
+            <%= link_to like_item_path(Item.find_by(id: activity.trackable_id)), method: :put do %>
+                Like:
+                <%= activity.user.items.find_by(name: activity.trackable_name).get_likes.size %>
+            <% end %>
 
     <% elsif activity.trackable.class == Item && activity.action == "destroy"%>
 
